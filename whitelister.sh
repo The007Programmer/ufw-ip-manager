@@ -23,10 +23,9 @@ main() {
         # sudo ufw reload
 
     elif [[ "$cmd" == "l" ]]; then
-        read -p "Whitelist, Blacklist, or ALL? (a/w/b)" 
+        read -p "Whitelist, Blacklist, or ALL? (w/b/a)" 
 
     fi
-
 
 
 }
@@ -65,7 +64,11 @@ list() {
 }
 
 showlist() {
-    local all={$1}
+    local whitelist={$1}
+    local blacklist={$2}
+    local all = {$3}
+
+    
 }
 
 main

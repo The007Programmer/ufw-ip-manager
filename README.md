@@ -6,9 +6,10 @@ A simple tool for IP management on servers.
 | Feature    | Implemented? |
 | -------- | ------- |
 |Can allow all IPs listed|✅|
-|Stores and recieves IPs from JSON file|❌|
+|Stores and recieves IPs from JSON file|✅|
 |Status commands (who is currently whitelisted)|❌|
-|Interactive IP addition/removal|❌|
+|Interactive IP addition/removal|✅|
+|Can clear DB of whitelisted or blacklisted users|❌|
 
 ## Usage
 
@@ -22,3 +23,4 @@ Download the ZIP file from the `CODE` tab, then run the shell file.
 - SAFE: Safe commit, latest code can be used
 - HTFX: Hotfix for critical issue
 - REFA: Refactored/Restructured code for better readability and/or efficiency
+- RESD: Removed edits from latest previous commit, unstability issues occured after testing
