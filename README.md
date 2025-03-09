@@ -19,8 +19,9 @@ Download the ZIP file from the `CODE` tab, then run the shell file.
 - `JQ` package for json handling
 
 ### Commits Key
-- UNST: Unstable commit, not to be used, solely for version control and code backup
 - SAFE: Safe commit, latest code can be used
+- UNST: Unstable commit, not to be used, solely for version control and code backup
+- INCM: Safe but incomplete, not to be used
 - HTFX: Hotfix for critical issue
 - REFA: Refactored/Restructured code for better readability and/or efficiency
 - RESD: Removed edits from latest previous commit, unstability issues occured after testing
