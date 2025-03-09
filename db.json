@@ -1,8 +1,11 @@
 {
   "whitelisted": {
-    "aa": "123123",
+    "aa": "123",
     "asd": "asdasdasd",
-    "Aahil": "12.345.678.90"
+    "Aahil": "12.345.678.90",
+    "jimmy": "1029"
   },
-  "blacklisted": {}
+  "blacklisted": {
+    "gjdsf": "23423.34"
+  }
 }
