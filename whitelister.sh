@@ -22,6 +22,9 @@ main() {
         # reloads all settings into effect
         # sudo ufw reload
 
+    elif [[ "$cmd" == "l" ]]; then
+        read -p "Whitelist, Blacklist, or ALL? (a/w/b)"
+
     fi
 
 
@@ -34,31 +37,33 @@ list() {
     local ip="$2"
     local whiteblack="$3"
 
-    if [[ "$3" == "w" ]] then
-        
-        # sudo ufw allow from "$ip" to any port 25565 proto tcp
-        
-        # adds to whitelisted database
-        jq --arg player "$player" --arg ip "$ip" '.whitelisted[$player] = $ip' db.json > temp.json && mv temp.json db.json
-        
-        # success message
-        echo "Successfully whitelisted $player with IP: $ip"
-    
-    elif [[ "$3" == "b" ]] then
-    
-        # sudo ufw deny from "$ip" to any port 25565 proto tcp
-        
-        # adds to blacklisted database
-        jq --arg player "$player" --arg ip "$ip" '.blacklisted[$player] = $ip' db.json > temp.json && mv temp.json db.json
-        
-        # success message
-        echo "Successfully blacklisted $player with IP: $ip"
-    
-    else
-        echo "Try again!"
-        main
+    # Check if player is already on the whitelist or blacklist and switch accordingly
+    if [[ "$whiteblack" == "w" ]]; then
+        # If player is blacklisted, remove from blacklist and add to whitelist
+        if [[ $(jq -r ".blacklisted[$player]" db.json) != "null" ]]; then
+            jq --arg player "$player" 'del(.blacklisted[$player])' db.json > temp.json && mv temp.json db.json
+            echo "$player was blacklisted. They have been switched to the whitelist."
+        fi
 
-    fi 
+        # Add to the whitelist
+        jq --arg player "$player" --arg ip "$ip" '.whitelisted[$player] = $ip' db.json > temp.json && mv temp.json db.json
+        echo "Successfully whitelisted $player with IP: $ip"
+
+    elif [[ "$whiteblack" == "b" ]]; then
+        # If player is whitelisted, remove from whitelist and add to blacklist
+        if [[ $(jq -r ".whitelisted[$player]" db.json) != "null" ]]; then
+            jq --arg player "$player" 'del(.whitelisted[$player])' db.json > temp.json && mv temp.json db.json
+            echo "$player was whitelisted. They have been switched to the blacklist."
+        fi
+
+        # Add to the blacklist
+        jq --arg player "$player" --arg ip "$ip" '.blacklisted[$player] = $ip' db.json > temp.json && mv temp.json db.json
+        echo "Successfully blacklisted $player with IP: $ip"
+
+    else
+        echo "Invalid input. Please try again!"
+        main
+    fi
 }
 
 showlist() {
