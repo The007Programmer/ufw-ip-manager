@@ -2,14 +2,12 @@ import os
 import json
 
 def main():
-    start = input("ENTER CMD #:\n1) MANAGE Users (Add/Remove/Switch)\n2) SHOW Whitelist/Blacklist\n3) SEARCH for a user\n4) EXIT\n\n")
+    start = input("ENTER CMD #:\n1) MANAGE Users (Add/Remove/Switch)\n2) SHOW Whitelist/Blacklist\n3) EXIT\n\n")
     if start == '1':
         manager()
     if start == '2':
         show_db()
     if start == '3':
-        search()
-    if start == '4':
         exit()
 
 def manager():
@@ -88,16 +86,11 @@ def show_db():
         case "w":
             print("\n===== WHITELIST =====")
             print(json.dumps(db.get("whitelist", {}), indent=4))
-            return1=input("\nPress  key to continue...\n")
         case "b":
             print("\n===== BLACKLIST =====")
             print(json.dumps(db.get("blacklist", {}), indent=4))
         case "a":
             print("\n===== ALL LISTS =====")
             print(json.dumps(db, indent=4))
-            
-
-def search():
-    pass
 
 main()
