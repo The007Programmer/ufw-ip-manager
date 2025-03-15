@@ -1,6 +1,6 @@
 # ufw-ip-manager
 
-A simple tool for IP management on servers.
+A simple tool for IP management on servers. Currently this python file is executable on LINUX servers.
 
 ## Features
 | Feature    | Implemented? |
@@ -20,6 +20,7 @@ Download the ZIP file from the `CODE` tab, then run the shell file.
 
 ### Commits Key
 - SAFE: Safe commit, latest code can be used
+- TEST: Safe commit, but won't run the main program code; solely testing purposes and commit for version control
 - UNST: Unstable commit, not to be used, solely for version control and code backup
 - INCM: Safe but incomplete, not to be used
 - HTFX: Hotfix for critical issue
