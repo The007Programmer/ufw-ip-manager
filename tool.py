@@ -17,7 +17,7 @@ def run_bash_file(path):
     except FileNotFoundError:
         print(f"Error: Bash script not found at path: {path}")
 
-#
+
 
 def run_bash_cmd(command):
         """
