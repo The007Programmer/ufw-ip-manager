@@ -16,13 +16,16 @@ A simple tool for IP management on servers. Currently this python file is execut
 Download the ZIP file from the `CODE` tab, then run the shell file.
 
 ### Requirements
-- `JQ` package for json handling
+- `json` python package for json handling
+- `os` python package for bash commands
+- `subprocess` for bash handling
 
 ### Commits Key
-- SAFE: Safe commit, latest code can be used
-- TEST: Safe commit, but won't run the main program code; solely testing purposes and commit for version control
-- UNST: Unstable commit, not to be used, solely for version control and code backup
-- INCM: Safe but incomplete, not to be used
-- HTFX: Hotfix for critical issue
-- REFA: Refactored/Restructured code for better readability and/or efficiency
-- RESD: Removed edits from latest previous commit, unstability issues occured after testing
+- SAFE: Stable and production-ready code; can be safely deployed.
+- TEST: Code meant for testing or experimental changes; safe but does not affect the main program directly; stable for version control.
+- UNST: Unstable commit with potential issues; not suitable for production, used for backup or testing phases.
+- HTFX: Hotfix for critical issues.
+- REFA: Refactor or restructure code for improved readability, maintainability, or efficiency, with no changes to core functionality.
+- RESD: Revert previous changes due to instability or issues encountered during testing; restores the code to a prior stable state.
+- BUGF: Bug fix or issue resolution, fixing known problems in the code without adding new functionality.
+- DOCS: Documentation update, including comments, README files, or other forms of documentation to improve clarity and understanding.

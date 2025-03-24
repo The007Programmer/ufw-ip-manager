@@ -25,20 +25,37 @@ def run_bash_cmd(command):
         """
         try:
             process = subprocess.run(['bash', '-c', command], capture_output=True, text=True, check=True)
-            print(process.stdout)
-            if process.stderr:
-                print(process.stderr)
+            return(process.stdout)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e.stderr if e.stderr else e}")
         except FileNotFoundError:
             print("Error: Bash not found.")
 
 
-run_bash_cmd("ls")
-
 def main():
-    pass
+    """
+    DESC: Run function for the program, handles UFW enabling, and actually executes the ufw rules.
+    ARGS: NONE
+    RTNS: NONE
+    """
 
+    ufw_state=run_bash_cmd("sudo ufw status")
+
+    match ufw_state:
+
+        # enabling UFW based on the current ufw status
+        case "Status: inactive\n":
+
+            print("\nUFW currently disabled... ENABLING UFW\nREMINDER: All IPs blocked by default, add to whitelist to allow to connect.\n")
+            run_bash_cmd("sudo ufw enable")
+    
+        case "Status: active\n":
+            
+            print("\nUFW enabled... continuing.\n")
+
+
+
+main()
 
 # main structure
 # --- checking if ufw enabled ---
@@ -51,7 +68,7 @@ def main():
 # add feature to SYNC, checks the current UFW rules
 # see if there are ips that arent in the whitelist
 # sync it to add it to our whitelist or blacklist
-# if ips not matching ask name for person, if none, hit enter or leave blank.
+# if ips not matching ask name for person, if none, hit enter or leave blank.   
 
 def prgm():
     start = input("ENTER CMD #:\n1) MANAGE Users (Add/Remove/Switch)\n2) SHOW Whitelist/Blacklist\n3) EXIT\n\n")
