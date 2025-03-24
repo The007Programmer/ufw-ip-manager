@@ -54,55 +54,78 @@ def manager():
     # Ask user specific details for modifying the lists
     name = input("\nUser Name? ")
     ip = input("User IP? ")
+    ports = input("Which ports to allow/block? (e.g. '80,443' or 'all' for all ports) ")
+    
+    # Process ports input
+    if ports.lower() != 'all':
+        try:
+            # Validate port numbers
+            port_list = [int(p.strip()) for p in ports.split(',')]
+            for port in port_list:
+                if port < 1 or port > 65535:
+                    print("\nInvalid port number! Ports must be between 1-65535")
+                    manager()
+                    return
+            ports = port_list
+        except ValueError:
+            print("\nInvalid port format! Use comma-separated numbers or 'all'")
+            manager()
+            return
+
     w_b = input("Whitelist or Blacklist? (w/b) ")
     match w_b:
         case "w" | "b":
-            # Proceed if proper input provided
             pass
         case _:
             print("\nPlease specify white/black list!")
             manager()
             return
+
     db_file = 'db.json'
-    # Check if database file exists in current directory
     if not os.path.exists(db_file):
         print(f"\nDatabase file '{db_file}' does not exist in the current directory.\n")
         return
-    # Read existing database file
+
     with open(db_file, 'r') as file:
         db = json.load(file)
-    # Process operations based on list choice using match-case
+
+    # Modified data structure to include ports
+    user_data = {
+        "ip": ip,
+        "ports": ports
+    }
+
     match w_b:
         case 'w':
             match True:
-                case _ if name in db.get("whitelist", {}) and db["whitelist"][name] == ip:
+                case _ if name in db.get("whitelist", {}) and db["whitelist"][name]["ip"] == ip:
                     print(f"\n{name} is already in the whitelist.\n")
-                case _ if name in db.get("blacklist", {}) and db["blacklist"][name] == ip:
+                case _ if name in db.get("blacklist", {}) and db["blacklist"][name]["ip"] == ip:
                     switch = input(f"{name} is in the blacklist. Do you want to switch to whitelist? (y/n) ")
                     if switch == 'y':
                         db["blacklist"].pop(name)
-                        db.setdefault("whitelist", {})[name] = ip
+                        db.setdefault("whitelist", {})[name] = user_data
                         print(f"\n{name} has been moved to the whitelist.\n")
                 case _:
-                    db.setdefault("whitelist", {})[name] = ip
+                    db.setdefault("whitelist", {})[name] = user_data
                     print(f"\n{name} has been added to the whitelist.\n")
         case 'b':
             match True:
-                case _ if name in db.get("blacklist", {}) and db["blacklist"][name] == ip:
+                case _ if name in db.get("blacklist", {}) and db["blacklist"][name]["ip"] == ip:
                     print(f"\n{name} is already in the blacklist.\n")
-                case _ if name in db.get("whitelist", {}) and db["whitelist"][name] == ip:
+                case _ if name in db.get("whitelist", {}) and db["whitelist"][name]["ip"] == ip:
                     switch = input(f"{name} is in the whitelist. Do you want to switch to blacklist? (y/n) ")
                     if switch == 'y':
                         db["whitelist"].pop(name)
-                        db.setdefault("blacklist", {})[name] = ip
+                        db.setdefault("blacklist", {})[name] = user_data
                         print(f"\n{name} has been moved to the blacklist.\n")
                 case _:
-                    db.setdefault("blacklist", {})[name] = ip
+                    db.setdefault("blacklist", {})[name] = user_data
                     print(f"\n{name} has been added to the blacklist.\n")
-    # Write updated database back to file
+
     with open(db_file, 'w') as file:
         json.dump(db, file, indent=2)
-    # Ask if user wants to add more users
+
     more = input("Do you want to add more users? (y/n) ")
     if more == 'y':
         manager()
