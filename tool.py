@@ -54,7 +54,7 @@ def manager():
     # Ask user specific details for modifying the lists
     name = input("\nUser Name? ")
     ip = input("User IP? ")
-    ports = input("Which ports to allow/block? (e.g. '80,443' or 'all' for all ports) ")
+    ports = input("Which ports to allow/block? (e.g. '80, 443' or 'all' for all ports) ")
     
     # Process ports input
     if ports.lower() != 'all':
@@ -143,7 +143,7 @@ def show_db():
         print(f"\nDatabase file '{db_file}' not found.\n")
         return
     # Ask user which list to view: whitelist, blacklist or all
-    which = input("\nWhich database would you like to see? Whitelist, Blacklist or All? (w/b/a) ")
+    which = input("\nWhich database would you like to see? Whitelist, Blacklist or All? (w/b/a)\n")
     # Selecting proper list to display using match-case
     match which:
         case "w":

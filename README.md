@@ -1,4 +1,4 @@
-# ufw-ip-manager
+# UFW-Manager
 
 A simple tool for IP management on servers. Currently this python file is executable on LINUX servers.
 
