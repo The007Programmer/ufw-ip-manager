@@ -7,7 +7,7 @@ A simple tool for IP management on servers. Currently this python file is execut
 | -------- | ------- |
 |Can allow all IPs listed|✅|
 |Stores and recieves IPs from JSON file|✅|
-|Status commands (who is currently whitelisted)|❌|
+|Status commands (who is currently whitelisted)|✅|
 |Interactive IP addition/removal|✅|
 |Can clear DB of whitelisted or blacklisted users|❌|
 
