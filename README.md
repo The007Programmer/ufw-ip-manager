@@ -1,6 +1,6 @@
 # UFW-Manager
 
-A simple tool for IP management on servers. Currently this python file is executable on LINUX servers.
+A simple tool for IP management on servers. Currently this python file is executable exclusively on Debian-based servers, as the bash commands are specific to the filepath and syntax of Debian architecture.
 
 ## Features
 | Feature    | Implemented? |
@@ -9,16 +9,20 @@ A simple tool for IP management on servers. Currently this python file is execut
 |Stores and recieves IPs from JSON file|✅|
 |Status commands (who is currently whitelisted)|✅|
 |Interactive IP addition/removal|✅|
-|Can clear DB of whitelisted or blacklisted users|❌|
+|Windows Server support|✅|
 
-## Usage
+## Installation and Usage
 
-Download the ZIP file from the `CODE` tab, then run the shell file.
+1. Download the ZIP file from the `CODE` tab in this repository.
+2. Extract contents to desired run folder (move to server if downloaded on computer).
+3. Open or `cd` to the project directory in a terminal.
+4. Run `python3 tool.py` to open the tool.
 
 ### Requirements
-- `json` python package for json handling
-- `os` python package for bash commands
-- `subprocess` for bash handling
+- `Python 3.10+` for running the application.
+- `json` python package for json handling.
+- `os` python package for bash commands.
+- `subprocess` for bash handling.
 
 ### Commits Key
 - SAFE: Stable and production-ready code; can be safely deployed.
